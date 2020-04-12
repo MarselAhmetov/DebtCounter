@@ -21,6 +21,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+import sun.misc.resources.Messages;
+import team404.project.model.ChatMessage;
+import team404.project.model.dto.MessageDto;
 import team404.project.service.implementations.MailSenderServiceImpl;
 import team404.project.service.implementations.TemplateProcessorImpl;
 import team404.project.service.interfaces.TemplateProcessor;
@@ -140,5 +143,10 @@ public class ApplicationContextConfig {
         properties.setProperty("hibernate.show_sql", "true");
         // properties.put("hibernate.allow_update_outside_transaction", "true");
         return properties;
+    }
+
+    @Bean
+    public Map<String, List<MessageDto>> getMessagesMap() {
+        return new HashMap<>();
     }
 }

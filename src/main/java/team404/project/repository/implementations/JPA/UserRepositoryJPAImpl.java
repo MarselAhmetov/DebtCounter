@@ -70,7 +70,8 @@ public class UserRepositoryJPAImpl implements UserRepository {
 
     @Override
     public Iterable<User> findAll() {
-        return null;
+        Query query = entityManager.createQuery("from User");
+        return query.getResultList();
     }
 
     @Override

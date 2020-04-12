@@ -11,10 +11,11 @@
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
     <script>
-        function sendMessage(pageId, text) {
+        function sendMessage(sender, text, receiver) {
             let body = {
-                pageId: pageId,
-                text: text
+                sender: sender,
+                text: text,
+                receiver: receiver
             };
 
             $.ajax({
@@ -24,39 +25,64 @@
                 contentType: "application/json",
                 dataType: "json",
                 complete: function () {
-                    if (text === 'Login') {
-                        receiveMessage(pageId)
+                    if (text === 'Entering in the chat') {
+                        receiveMessage(sender)
                     }
                 }
             });
         }
 
         // LONG POLLING
-        function receiveMessage(pageId) {
+        function receiveMessage(username) {
             $.ajax({
-                url: "/messages?pageId=" + pageId,
+                url: "/messages?username=" + username,
                 method: "GET",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (response) {
-                    $('#messages').first().after('<li>' + response[0]['text'] + '</li>');
-                    receiveMessage(pageId);
+                    $('#messages').first().after('<li>' + response[0]['sender'] + ' :=: ' + response[0]['text'] + '</li>');
+                    receiveMessage(username);
                 }
+            })
+        }
+
+        function sendOnClose(username) {
+            $.ajax({
+                url: "/deleteMessages",
+                method: "GET",
+                data: JSON.stringify(username),
+                dataType: "json",
+                contentType: "application/json",
             })
         }
     </script>
 </head>
-<body onload="sendMessage('${pageId}', 'Login')">
-<h1>Ваш идентификатор - ${pageId}</h1>
+<body onload="sendMessage('${currentUser.username}', 'Entering in the chat'); receiveMessage(${currentUser.username})">
+<h1>Your are - ${currentUser.username}</h1>
 <div>
     <input id="message" placeholder="Ваше сообщение">
-    <button onclick="sendMessage('${pageId}',
-            $('#message').val())">Отправить</button>
+    <select id="receiver">
+        <#list users as user>
+            <option value="${user.username}">
+                <#if user.role = "SUPPORT">
+                    ${user.role}
+                <#else>
+                    ${user.username}
+                </#if>
+            </option>
+        </#list>
+    </select>
+    <button onclick="sendMessage('${currentUser.username}',
+            $('#message').val(), $('#receiver').val())">Send
+    </button>
 </div>
 <div>
     <ul id="messages">
 
     </ul>
+    <#list messages as message>
+        <li>${message.sender.username} :=: ${message.text}</li>
+    </#list>
 </div>
 </body>
 </html>
