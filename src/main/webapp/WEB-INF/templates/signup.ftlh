@@ -33,6 +33,7 @@
             <h1>SignUp</h1>
             <br>
             <form action="/signUp" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="Email" >
                 </div>

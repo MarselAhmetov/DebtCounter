@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public class ChatMessageRepositoryImpl implements ChatMessageRepository {
+public class ChatMessageRepositoryJPAImpl implements ChatMessageRepository {
 
     @PersistenceContext
     EntityManager entityManager;

@@ -150,6 +150,7 @@
                 <#list oldestDebts as oldestDebt>
                     <tr>
                         <form action="/person">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <td>${oldestDebt.owner.username}</td>
                             <td>${oldestDebt.debtCount}</td>
                             <td>${oldestDebt.date}</td>
@@ -176,6 +177,7 @@
                 <#list maxDebtCounts as maxDebtCount>
                     <tr>
                         <form action="/person">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <td>${maxDebtCount.owner.username}</td>
                             <td>${maxDebtCount.debtCount}</td>
                             <td>${maxDebtCount.date}</td>
@@ -202,6 +204,7 @@
                 <#list minDebtCounts as minDebtCount>
                     <tr>
                         <form action="/person">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <td>${minDebtCount.owner.username}</td>
                             <td>${minDebtCount.debtCount}</td>
                             <td>${minDebtCount.date}</td>
@@ -229,6 +232,7 @@
                 <#list priorityDebts as priorityDebt>
                     <tr>
                         <form action="/person">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                             <td>${priorityDebt.owner.username}</td>
                             <td>${priorityDebt.debtCount}</td>
                             <td>${priorityDebt.date}</td>
@@ -292,6 +296,7 @@
                     </button>
                 </div>
                 <form action="/debts" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="input-group">
@@ -359,6 +364,7 @@
                     </button>
                 </div>
                 <form action="/friends" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="email" class="form-control" name="email" placeholder="Friend email">

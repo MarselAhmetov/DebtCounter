@@ -25,10 +25,6 @@ public class DebtsPrioritySorterImpl implements DebtPrioritySorter {
             debtCountMap.put(((User) user[0]).getId(), Long.parseLong(String.valueOf(user[1])));
         }
         for (Debt debt : debts) {
-            System.out.println(debt);
-            System.out.println(debt.getDebtCount());
-            System.out.println(debtCountMap.get(debt.getOwner().getId()));
-            System.out.println(Math.abs(ChronoUnit.DAYS.between(debt.getDate(), LocalDate.now())));
             debt.setPriority(debt.getDebtCount() * 1.5 * debtCountMap.get(debt.getOwner().getId()) + Math.abs(ChronoUnit.DAYS.between(debt.getDate(), LocalDate.now())) * 100);
         }
         debts.sort((o1, o2) -> o2.getPriority().compareTo(o1.getPriority()));

@@ -17,6 +17,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.session.jdbc.JdbcOperationsSessionRepository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -149,4 +150,5 @@ public class ApplicationContextConfig {
     public Map<String, List<MessageDto>> getMessagesMap() {
         return new HashMap<>();
     }
+
 }

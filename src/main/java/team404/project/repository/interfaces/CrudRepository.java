@@ -1,5 +1,7 @@
 package team404.project.repository.interfaces;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
