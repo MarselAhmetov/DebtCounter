@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        http.csrf().disable();
 
-        http.addFilterBefore(customFilter, FilterSecurityInterceptor.class);
+        //http.addFilterBefore(customFilter, FilterSecurityInterceptor.class);
 
         http.authorizeRequests()
                 .antMatchers("/signUp").permitAll()
@@ -63,13 +63,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .defaultSuccessUrl("/profile")
                 .failureUrl("/signIn?error")
-                .successHandler(successHandler)
+               // .successHandler(successHandler)
                 .permitAll();
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/signIn")
-                .logoutSuccessHandler(logoutSuccessHandler)
+               // .logoutSuccessHandler(logoutSuccessHandler)
                 .invalidateHttpSession(true);
     }
 

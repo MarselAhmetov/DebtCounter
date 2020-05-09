@@ -148,13 +148,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.10.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-jdbc -->
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-jdbc</artifactId>
-            <version>1.2.0.RC1</version>
+            <version>2.2.2.RELEASE</version>
         </dependency>
-
     </dependencies>
 
 
