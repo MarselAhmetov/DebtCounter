@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<#import "spring.ftl" as spring />
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -38,20 +39,20 @@
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4 text-center">
-            <h1>Login</h1>
+            <h1><@spring.message 'signin.page.signin'/></h1>
             <br>
             <form action="/signIn" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Username">
+                    <input type="text" name="username" class="form-control" placeholder="<@spring.message 'signin.page.username'/>">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" class="form-control" placeholder="<@spring.message 'signin.page.password'/>">
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" name="rememberMe" class="form-control" placeholder="Remember me">
+                    <input type="checkbox" name="rememberMe" class="form-control" placeholder="<@spring.message 'signin.page.rememberMe'/>">
                 </div>
-                <button type="submit" class="btn btn-warning">SignIn</button>
+                <button type="submit" class="btn btn-warning"><@spring.message 'signin.page.signin'/></button>
             </form>
         </div>
         <div class="col-md-4"></div>
