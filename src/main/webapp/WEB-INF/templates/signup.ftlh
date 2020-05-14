@@ -1,3 +1,5 @@
+<#ftl encoding="UTF-8"/>
+<#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,19 +34,21 @@
         <div class="col-md-4 text-center">
             <h1>SignUp</h1>
             <br>
-            <form action="/signUp" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Email" >
-                </div>
-                <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Username" >
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password" >
-                </div>
-                <button type="submit" class="btn btn-warning">SignUp</button>
-            </form>
+            <div class="form-container">
+                <@spring.message code="signUp"/>
+                <@spring.bind "signUpDto"/>
+                <form action="/signUp" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <@spring.formInput "signUpDto.email"/>
+                    <br>
+                    <@spring.formInput "signUpDto.username"/>
+                    <br>
+                    <@spring.formPasswordInput "signUpDto.password"/>
+                    <br>
+                    <@spring.showErrors ""/>
+                    <button type="submit" class="btn btn-warning">SignUp</button>
+                </form>
+            </div>
         </div>
         <div class="col-md-4"></div>
     </div>

@@ -10,11 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import team404.project.security.CustomFilter;
+import team404.project.security.LangFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -38,13 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private LogoutSuccessHandler logoutSuccessHandler;
 
     @Autowired
-    private CustomFilter customFilter;
+    private LangFilter langFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        http.csrf().disable();
 
-        //http.addFilterBefore(customFilter, FilterSecurityInterceptor.class);
+        http.addFilterBefore(langFilter, ChannelProcessingFilter.class);
 
         http.authorizeRequests()
                 .antMatchers("/signUp").permitAll()
