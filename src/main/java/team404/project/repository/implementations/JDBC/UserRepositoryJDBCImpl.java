@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import team404.project.model.AccountStatus;
 import team404.project.model.Role;
 import team404.project.model.User;
+import team404.project.model.dto.UserInformationDto;
 import team404.project.repository.interfaces.UserRepository;
 
 import java.util.List;
@@ -45,6 +46,11 @@ public class UserRepositoryJDBCImpl implements UserRepository {
     @Override
     public void setStatus(Integer id, AccountStatus accountStatus) {
         jdbcTemplate.update(SQL_UPDATE_USER, accountStatus.toString(), id);
+    }
+
+    @Override
+    public UserInformationDto getInformationByUsername(String username) {
+        return null;
     }
 
     @Override

@@ -38,6 +38,7 @@ public class ProfileController {
         modelAndView.addObject("minDebtCounts", debtService.findMinDebtCountByDebtor(userDetails.getUser(), 3));
         List<Debt> debts = debtPrioritySorter.sortByPriority(debtService.getByDebtor(userDetails.getUser()), userDetails.getUser());
         modelAndView.addObject("priorityDebts", debts.subList(0, Math.min(debts.size(), 13)));
+        System.out.println(userService.getInformationByUsername(userDetails.getUsername()).toString());
         return modelAndView;
     }
 }

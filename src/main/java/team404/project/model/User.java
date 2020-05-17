@@ -2,6 +2,7 @@ package team404.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 @ToString(exclude = "friends")
 @JsonIgnoreProperties(value = {"friends"})
+@Slf4j
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +35,21 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     List<User> friends;
 
+    @Transient
+    private String emailName;
+
+    private String emailType;
+
+    @PostLoad
+    public void loadUser() {
+        emailName = email.substring(0, email.lastIndexOf("@") + 1);
+        log.info("Load user for " + emailType);
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void updateUserInformation() {
+        this.emailType = email.substring(email.lastIndexOf("@"));
+        log.info("Update file information for " + emailName);
+    }
 }

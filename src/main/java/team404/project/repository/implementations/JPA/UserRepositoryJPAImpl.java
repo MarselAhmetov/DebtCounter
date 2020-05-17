@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import team404.project.model.AccountStatus;
 import team404.project.model.User;
+import team404.project.model.dto.UserInformationDto;
 import team404.project.repository.interfaces.UserRepository;
 
 import javax.persistence.EntityManager;
@@ -44,6 +45,13 @@ public class UserRepositoryJPAImpl implements UserRepository {
         query.setParameter("status", accountStatus);
         query.setParameter("id", id);
         query.executeUpdate();
+    }
+
+    @Override
+    public UserInformationDto getInformationByUsername(String username) {
+        Query query = entityManager.createQuery("select new team404.project.model.dto.UserInformationDto(user.username, user.email, user.emailType) from User user where user.username = :username", UserInformationDto.class);
+        query.setParameter("username", username);
+        return (UserInformationDto) query.getSingleResult();
     }
 
     @Override
